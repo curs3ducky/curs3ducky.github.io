@@ -16,59 +16,57 @@ document.addEventListener('DOMContentLoaded', () => {
     let starCreationInterval;
 
 function createStar() {
+    const starContainer = document.createElement('div');
+    starContainer.style.position = 'absolute';
+    const containerSize = 45;
+    const startPosX = Math.random() * (window.innerWidth - containerSize);
+    const startPosY = Math.random() * (window.innerHeight * 0.5 - containerSize);
+    starContainer.style.left = `${startPosX}px`;
+    starContainer.style.top = `${startPosY}px`;
+    starContainer.style.width = `${containerSize}px`;
+    starContainer.style.height = `${containerSize}px`;
+    starContainer.style.display = 'flex';
+    starContainer.style.alignItems = 'center';
+    starContainer.style.justifyContent = 'center';
+    bubbleArea.appendChild(starContainer);
+
     const star = document.createElement('div');
     star.className = 'star';
-    // Set the initial position of the star
-    star.style.position = 'absolute';
-    const startPosX = Math.random() * window.innerWidth;
-    const startPosY = Math.random() * (window.innerHeight * 0.5);
-    star.style.left = `${startPosX}px`;
-    star.style.top = `${startPosY}px`;
-    bubbleArea.appendChild(star);
+    starContainer.appendChild(star);
 
-    let elapsed = 0; // Track the elapsed time in seconds
-    // Adjusting the growth rate for more frequent updates
-    const growthPerUpdate = 2; // Max size increases by 2px per 0.1 second
-    const minSize = 4; // Minimum size of the star
-    const colors = ['yellow']; // Possible colors
-    let colorIndex = Math.floor(Math.random() * colors.length); // Start with a random color
+    let elapsed = 0;
+    const growthPerUpdate = 2;
+    const minSize = 4;
+    const colors = ['yellow'];
+    let colorIndex = 0;
 
     const updateStar = () => {
-        elapsed += 0.1; // Update every 0.1 seconds
-        let currentSize = minSize + growthPerUpdate * (elapsed * 10); // Calculate current size based on elapsed time
+        elapsed += 0.1;
+        let currentSize = minSize + growthPerUpdate * (elapsed * 10);
+        const cyclePosition = (elapsed % 0.5) / 0.5;
+        const dynamicSize = minSize + (currentSize - minSize) * (cyclePosition <= 0.5 ? cyclePosition * 2 : (1 - cyclePosition) * 2);
+        star.style.width = `${dynamicSize * (1 - cyclePosition)}px`;
+        star.style.height = `${dynamicSize * cyclePosition}px`;
+        star.style.backgroundColor = colors[colorIndex];
 
-// Oscillate size between minSize and currentSize every 0.1 seconds
-const cyclePosition = (elapsed % 0.5) / 0.5;
-const dynamicSize = minSize + (currentSize - minSize) * (cyclePosition <= 0.5 ? cyclePosition * 2 : (1 - cyclePosition) * 2);
-
-// Apply the inverse relationship for width and height oscillation
-star.style.width = `${dynamicSize * (1 - cyclePosition)}px`; // Decrease width as cyclePosition increases
-star.style.height = `${dynamicSize * cyclePosition}px`; // Increase height as cyclePosition increases
-
-// Calculate the new position to keep the star centered
-const newPositionX = startPosX - (dynamicSize * (1 - cyclePosition)) / 2; // Adjust for dynamicSize
-const newPositionY = startPosY - (dynamicSize * cyclePosition) / 2; // Adjust for dynamicSize
-
-// Set the new position
-star.style.left = `${newPositionX}px`;
-star.style.top = `${newPositionY}px`;
-
-
-        // Randomly change color
         if (Math.random() < 0.1) {
             colorIndex = (colorIndex + 1) % colors.length;
             star.style.backgroundColor = colors[colorIndex];
         }
     };
 
-    // Start updating the star
     const updateInterval = setInterval(updateStar, 100);
 
-    // After 3 seconds, stop updating and remove the star
     setTimeout(() => {
         clearInterval(updateInterval);
-        star.remove();
+        starContainer.remove(); // Ensure the container is removed, not just the star
     }, 3000);
+
+    // Add event listener to the container for popping the star
+    starContainer.addEventListener('click', function() {
+        const messageIndex = Math.floor(Math.random() * messages.length);
+        popStar(starContainer, messages[messageIndex]); // Pass the container to popStar
+    });
 }
 
 
