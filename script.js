@@ -1,6 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const bubbleArea = document.getElementById('bubble-area');
-    const messages = Array.from({ length: 20 }, (_, i) => `Message ${i + 1}`);
+    // Define your 10 specific messages here
+    const messages = [
+        "Message 1",
+        "Message 2",
+        "Message 3",
+        "Message 4",
+        "Message 5",
+        "Message 6",
+        "Message 7",
+        "Message 8",
+        "Message 9",
+        "Message 10"
+    ];
     let starCreationInterval;
 
     function createStar() {
@@ -20,12 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function popStar(star, message) {
-        star.innerText = message;
-        star.style.opacity = 0;
-        star.style.transform = 'scale(0)';
+        const messageElement = document.createElement('div');
+        messageElement.innerText = message;
+        messageElement.style.position = 'absolute';
+        messageElement.style.left = star.style.left;
+        messageElement.style.top = star.style.top;
+        messageElement.style.color = 'white'; // Choose an appropriate text color
+        messageElement.style.fontSize = '24px'; // Larger text size
+        messageElement.style.zIndex = '1000'; // Ensure it's above other elements
+        bubbleArea.appendChild(messageElement);
+
+        star.remove(); // Remove the star immediately
+
         setTimeout(() => {
-            star.remove();
-        }, 1000); // Remove star after 1 second to allow for fade-out animation
+            messageElement.remove();
+        }, 5000); // Message disappears after 5 seconds for longer visibility
     }
 
     const startButton = document.getElementById('start-adventure');
