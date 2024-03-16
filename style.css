@@ -13,13 +13,26 @@ body {
     height: 0;
     opacity: 0;
     transition: opacity 1s, transform 1s; /* Transition for the pop effect */
-    animation: shine 2s forwards; /* Animation to grow and shine */
+    animation: shine 3s forwards; /* Animation to grow and shine */
 }
 
 @keyframes shine {
-    to {
-        width: 75px; /* 2cm approximately */
-        height: 75px;
-        opacity: 1;
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.5; /* Starting with a bit of visibility */
+        background-color: yellow;
+    }
+    50% {
+        width: 50px; /* Making it a bit smaller than before */
+        height: 50px;
+        opacity: 1; /* Fully visible at the halfway point */
+        background-color: white; /* Change to white at the halfway point */
+    }
+    100% {
+        width: 50px;
+        height: 50px;
+        opacity: 0.5; /* Ending with a bit of visibility */
+        background-color: yellow; /* Back to yellow */
     }
 }
