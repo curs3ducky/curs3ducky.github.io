@@ -74,7 +74,7 @@ function popStar(star, message) {
     const messageElement = document.createElement('div');
     messageElement.innerText = message;
     messageElement.style.position = 'absolute';
-    messageElement.style.left = '45%';
+    messageElement.style.left = '20%';
     messageElement.style.top = '20%';
     messageElement.style.transform = 'translate(-50%, -50%)'; // Center the message
     messageElement.style.color = 'white'; // Text color
