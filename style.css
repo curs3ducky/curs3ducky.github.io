@@ -1,16 +1,17 @@
+/* Base styles */
 body {
-    background-image: url('space.webp'); /* If the image is in the root directory */
+    background-image: url('space.webp');
     background-size: cover;
-    background-position: top center;
+    background-position: bottom center;
     background-repeat: no-repeat;
+    transition: background-position 0.5s ease; /* Smooth transition for background-position */
 }
 
-/* Example media query for devices with a max-width of 768px */
+/* Styles for mobile devices */
 @media (max-width: 768px) {
     body {
-        background-size: cover;
-        background-position: top center;
-        /* Adjustments specific to mobile devices */
+        background-position: top center; /* Shifts the background image down */
+        padding-top: 20vh; /* Adds padding to the top, pushing all content down */
     }
 }
 
