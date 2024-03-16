@@ -1,7 +1,7 @@
 body {
     background-image: url('space.webp'); /* If the image is in the root directory */
     background-size: cover;
-    background-position: center;
+    background-position: top center;
     background-repeat: no-repeat;
 }
 
@@ -9,6 +9,7 @@ body {
 @media (max-width: 768px) {
     body {
         background-size: cover;
+        background-position: top center;
         /* Adjustments specific to mobile devices */
     }
 }
