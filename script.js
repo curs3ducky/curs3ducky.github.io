@@ -23,6 +23,9 @@ function createStar() {
     star.style.top = `${startPos}px`;
     bubbleArea.appendChild(star);
 
+    star.style.width = '20px';  // Example width
+    star.style.height = '20px'; // Example height
+
     // Possible colors for the star
     const colors = ['yellow', 'white', 'lightblue']; // Example colors
     let currentColorIndex = 0; // Start with the first color
