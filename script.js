@@ -2,16 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const bubbleArea = document.getElementById('bubble-area');
     // Define your 10 specific messages here
     const messages = [
-        "1/10. Your existance /nmakes people happy.",
-        "2/10. You are precious /n& loved.",
-        "3/10. You are generous /n& loving.",
-        "4/10. You are curious /n& interesting.",
-        "5/10. You are artistic /n& creative.",
-        "6/10. You are fun /n& a good friend.",
-        "7/10. You are kind /n& sweet.",
-        "8/10. You are loyal /n& thoughtful.",
-        "9/10. You are resiliant /n& try again.",
-        "10/10. Many people /nbelieve in you."
+        "1/10. Your existance \nmakes people happy.",
+        "2/10. You are precious \n& loved.",
+        "3/10. You are generous \n& loving.",
+        "4/10. You are curious \n& interesting.",
+        "5/10. You are artistic \n& creative.",
+        "6/10. You are fun \n& a good friend.",
+        "7/10. You are kind \n& sweet.",
+        "8/10. You are loyal \n& thoughtful.",
+        "9/10. You are resiliant \n& try again.",
+        "10/10. Many people \nbelieve in you."
     ];
     let starCreationInterval;
 
@@ -74,7 +74,7 @@ function popStar(star, message) {
     const messageElement = document.createElement('div');
     messageElement.innerText = message;
     messageElement.style.position = 'absolute';
-    messageElement.style.left = '20%';
+    messageElement.style.left = '50%';
     messageElement.style.top = '20%';
     messageElement.style.transform = 'translate(-50%, -50%)'; // Center the message
     messageElement.style.color = 'white'; // Text color
