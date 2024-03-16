@@ -28,9 +28,9 @@ function createStar() {
 
     let elapsed = 0; // Track the elapsed time in seconds
     // Adjusting the growth rate for more frequent updates
-    const growthPerUpdate = 1.5; // Max size increases by 1.5px per 0.1 second
-    const minSize = 5; // Minimum size of the star
-    const colors = ['yellow', 'white', 'lightblue']; // Possible colors
+    const growthPerUpdate = 2; // Max size increases by 2px per 0.1 second
+    const minSize = 4; // Minimum size of the star
+    const colors = ['yellow']; // Possible colors
     let colorIndex = Math.floor(Math.random() * colors.length); // Start with a random color
 
     const updateStar = () => {
@@ -72,23 +72,25 @@ star.style.top = `${newPositionY}px`;
 }
 
 
-    function popStar(star, message) {
-        const messageElement = document.createElement('div');
-        messageElement.innerText = message;
-        messageElement.style.position = 'absolute';
-        messageElement.style.left = star.style.left;
-        messageElement.style.top = star.style.top;
-        messageElement.style.color = 'white'; // Choose an appropriate text color
-        messageElement.style.fontSize = '24px'; // Larger text size
-        messageElement.style.zIndex = '1000'; // Ensure it's above other elements
-        bubbleArea.appendChild(messageElement);
+function popStar(star, message) {
+    const messageElement = document.createElement('div');
+    messageElement.innerText = message;
+    messageElement.style.position = 'absolute';
+    messageElement.style.left = '50%';
+    messageElement.style.top = '50%';
+    messageElement.style.transform = 'translate(-50%, -50%)'; // Center the message
+    messageElement.style.color = 'white'; // Choose an appropriate text color
+    messageElement.style.fontSize = '24px'; // Larger text size
+    messageElement.style.zIndex = '1000'; // Ensure it's above other elements
+    messageElement.style.textAlign = 'center'; // Center text within the element
+    bubbleArea.appendChild(messageElement);
 
-        star.remove(); // Remove the star immediately
+    star.remove(); // Remove the star immediately
 
-        setTimeout(() => {
-            messageElement.remove();
-        }, 5000); // Message disappears after 5 seconds for longer visibility
-    }
+    setTimeout(() => {
+        messageElement.remove();
+    }, 5000); // Message disappears after 5 seconds for longer visibility
+}
 
     const startButton = document.getElementById('start-adventure');
     if (startButton) {
