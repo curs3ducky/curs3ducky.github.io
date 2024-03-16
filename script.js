@@ -37,24 +37,18 @@ function createStar() {
         elapsed += 0.1; // Update every 0.1 seconds
         let currentSize = minSize + growthPerUpdate * (elapsed * 10); // Calculate current size based on elapsed time
 
-        // Oscillate size between minSize and currentSize every 0.1 seconds
-        const cyclePosition = (elapsed % 0.5) / 0.5;
-        const size = cyclePosition < 0.5 ? 
-                     minSize + (currentSize - minSize) * (cyclePosition * 2) :
-                     currentSize - (currentSize - minSize) * ((cyclePosition - 0.5) * 2);
-        
-        star.style.width = `${size*cyclePosition}px`;
-        star.style.height = `${size*(1-cyclePosition)}px`; // Inverse
-        star.style.backgroundColor = colors[colorIndex];
-        star.style.opacity = (0.5 + Math.random() * 0.5).toString(); // Random opacity between 0.5 and 1.0
+// Oscillate size between minSize and currentSize every 0.1 seconds
+const cyclePosition = (elapsed % 0.5) / 0.5;
+const dynamicSize = minSize + (currentSize - minSize) * (cyclePosition <= 0.5 ? cyclePosition * 2 : (1 - cyclePosition) * 2);
 
-// Calculate the new position to keep the star centered
-const newPositionX = startPosX - (size * cyclePosition) / 2;
-const newPositionY = startPosY - (size * (1 - cyclePosition)) / 2;
+// Apply the inverse relationship for width and height oscillation
+star.style.width = `${dynamicSize * (1 - cyclePosition)}px`; // Decrease width as cyclePosition increases
+star.style.height = `${dynamicSize * cyclePosition}px`; // Increase height as cyclePosition increases
 
-// Set the new position
-star.style.left = `${newPositionX}px`;
-star.style.top = `${newPositionY}px`;
+// Centering the star correctly
+star.style.left = `${startPosX - dynamicSize / 2}px`; // Use dynamicSize / 2 to keep centered
+star.style.top = `${startPosY - dynamicSize / 2}px`; // Same for vertical centering
+
 
         // Randomly change color
         if (Math.random() < 0.1) {
