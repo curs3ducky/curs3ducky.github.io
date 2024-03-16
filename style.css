@@ -18,7 +18,7 @@ body {
 /* Styles for mobile devices */
 @media (max-width: 768px) {
     body {
-        background-position: center 30%; /* Shifts the background image down */
-        padding-top: 30vh; /* Adds padding to the top, pushing all content down */
+        background-position: center 50%; /* Shifts the background image down */
+        padding-top: 40vh; /* Adds padding to the top, pushing all content down */
     }
 }
