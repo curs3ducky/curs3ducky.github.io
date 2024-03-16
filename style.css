@@ -1,8 +1,8 @@
 body {
     background-image: url('space.webp'); /* If the image is in the root directory */
-    background-size: cover;
+    background-size: contain;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
 }
 
 .star {
