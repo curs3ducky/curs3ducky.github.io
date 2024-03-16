@@ -45,9 +45,13 @@ const dynamicSize = minSize + (currentSize - minSize) * (cyclePosition <= 0.5 ? 
 star.style.width = `${dynamicSize * (1 - cyclePosition)}px`; // Decrease width as cyclePosition increases
 star.style.height = `${dynamicSize * cyclePosition}px`; // Increase height as cyclePosition increases
 
-// Centering the star correctly
-star.style.left = `${startPosX - dynamicSize / 2}px`; // Use dynamicSize / 2 to keep centered
-star.style.top = `${startPosY - dynamicSize / 2}px`; // Same for vertical centering
+// Calculate the new position to keep the star centered
+const newPositionX = startPosX - (size * cyclePosition) / 2;
+const newPositionY = startPosY - (size * (1 - cyclePosition)) / 2;
+
+// Set the new position
+star.style.left = `${newPositionX}px`;
+star.style.top = `${newPositionY}px`;
 
 
         // Randomly change color
