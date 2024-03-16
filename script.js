@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define your 10 specific messages here
     const messages = [
         "1/10. Your existance makes people happy.",
-        "2/10. You are precious & loved.",
-        "3/10. You are generous & loving.",
-        "4/10. You are curious & interesting.",
-        "5/10. You are artistic & creative.",
-        "6/10. You are fun & a good friend.",
-        "7/10. You are kind & sweet.",
-        "8/10. You are loyal & thoughtful.",
-        "9/10. You are resiliant & try again.",
+        "2/10. You are precious /n & loved.",
+        "3/10. You are generous /n & loving.",
+        "4/10. You are curious /n & interesting.",
+        "5/10. You are artistic /n & creative.",
+        "6/10. You are fun /n & a good friend.",
+        "7/10. You are kind /n & sweet.",
+        "8/10. You are loyal /n & thoughtful.",
+        "9/10. You are resiliant /n & try again.",
         "10/10. Many people believe in you."
     ];
     let starCreationInterval;
