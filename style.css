@@ -2,7 +2,7 @@
 body {
     background-image: url('space.webp');
     background-size: cover;
-    background-position: bottom center;
+    background-position: center center;
     background-repeat: no-repeat;
     transition: background-position 0.5s ease; /* Smooth transition for background-position */
 }
