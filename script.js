@@ -21,48 +21,41 @@ function createStar() {
     const startPos = Math.random() * (window.innerHeight * 0.5);
     star.style.left = `${Math.random() * window.innerWidth}px`;
     star.style.top = `${startPos}px`;
-    star.style.opacity = '1'; // Ensure visibility for testing
     bubbleArea.appendChild(star);
 
-    // Initialize star dimensions
-    star.style.width = '0px';
-    star.style.height = '0px';
+    let growing = true; // Flag to track if the star is growing or shrinking
+    let currentSize = 0; // Track the current size of the star
+    const maxSize = 45; // Max size for width or height
+    const stepSize = 9; // Determine step size for smoother transition within 0.5s
 
-    let growing = true; // Flag to track growth/shrink
+    // Function to update star dimensions for stretching effect
+    const updateStarSize = () => {
+        // Update size based on growing or shrinking phase
+        currentSize = growing ? currentSize + stepSize : currentSize - stepSize;
 
-    // Function to update star dimensions
-    function updateStarSize() {
-        const maxSize = 45; // Maximum size of width/height
-        let size = parseInt(star.style.width, 10); // Current size
-
-        if (growing) {
-            size += 5; // Increment size
-            if (size >= maxSize) {
-                growing = false; // Start shrinking once max size is reached
-            }
-        } else {
-            size -= 5; // Decrement size
-            if (size <= 0) {
-                growing = true; // Start growing once min size is reached
-            }
+        // Adjust growing/shrinking phase based on current size
+        if (currentSize >= maxSize || currentSize <= 0) {
+            growing = !growing;
+            currentSize = growing ? 0 : maxSize; // Reset currentSize for seamless transition
         }
 
-        // Update dimensions to stretch in alternate directions
+        // Apply the stretching effect
         if (growing) {
-            star.style.width = `${size}px`;
-            star.style.height = `${maxSize - size}px`;
+            star.style.width = `${currentSize}px`;
+            star.style.height = `${maxSize - currentSize}px`;
         } else {
-            star.style.width = `${maxSize - size}px`;
-            star.style.height = `${size}px`;
+            star.style.width = `${maxSize - currentSize}px`;
+            star.style.height = `${currentSize}px`;
         }
-    }
+    };
 
-    // Update star size twice a second
-    const sizeInterval = setInterval(updateStarSize, 500);
+    // Set interval to update the star size more frequently
+    const intervalTime = 50; // 50ms for faster transitions
+    const updateInterval = setInterval(updateStarSize, intervalTime);
 
     // Remove the star and clear the interval after 3 seconds
     setTimeout(() => {
-        clearInterval(sizeInterval);
+        clearInterval(updateInterval);
         star.remove();
     }, 3000);
 }
