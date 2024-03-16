@@ -24,40 +24,45 @@ function createStar() {
     star.style.position = 'absolute';
     bubbleArea.appendChild(star);
 
-    let maxSize = 0; // Initial max size of the star
+    let elapsed = 0; // Track the elapsed time in seconds
+    const growthPerSecond = 15; // Max size increases by 15px per second
+    const minSize = 5; // Minimum size of the star
+    let maxSize = minSize; // Initial max size of the star
     const colors = ['yellow', 'white', 'lightblue']; // Possible colors
     let colorIndex = 0; // Initial color index
 
-    // Function to update star size, color, and opacity
-    const updateInterval = setInterval(() => {
-        maxSize += 15 / 2; // Increase max size every half second
+    const updateStar = () => {
+        elapsed += 0.5; // Update every half second
+        maxSize = minSize + growthPerSecond * elapsed; // Update max size based on elapsed time
 
-        // Calculate width and height based on time
-        const cyclePosition = (new Date().getTime() / 500) % 2; // Cycle between 0 and 1 every half second
-        const widthPercentage = cyclePosition <= 1 ? cyclePosition : 2 - cyclePosition;
+        const cyclePosition = elapsed % 1; // Cycle position between 0 and 1 over 1 second
+        const widthPercentage = cyclePosition <= 0.5 ? cyclePosition * 2 : (1 - cyclePosition) * 2;
         const heightPercentage = 1 - widthPercentage;
 
-        star.style.width = `${maxSize * widthPercentage}px`;
-        star.style.height = `${maxSize * heightPercentage}px`;
+        star.style.width = `${minSize + (maxSize - minSize) * widthPercentage}px`;
+        star.style.height = `${minSize + (maxSize - minSize) * heightPercentage}px`;
         star.style.backgroundColor = colors[colorIndex];
         star.style.opacity = Math.random().toString();
 
-        // Change color and ensure it stays centered
+        // Centering might need adjustment based on new logic
+        star.style.left = `calc(${startPos}px - ${star.style.width} / 2)`;
+        star.style.top = `calc(${startPos}px - ${star.style.height} / 2)`;
+
+        // 50% chance to change color with each update
         if (Math.random() < 0.5) {
             colorIndex = (colorIndex + 1) % colors.length;
         }
+    };
 
-        // Keep the star centered
-        star.style.left = `calc(${Math.random() * window.innerWidth}px - ${star.style.width} / 2)`;
-        star.style.top = `calc(${startPos}px - ${star.style.height} / 2)`;
+    // Update the star every 0.5 seconds
+    const updateInterval = setInterval(updateStar, 500);
 
-    }, 500);
-
-    // Remove the star after 3 seconds
+    // After 4 seconds, stop updating and remove the star
     setTimeout(() => {
         clearInterval(updateInterval);
         star.remove();
-    }, 3000);
+        createStar(); // Create a new star
+    }, 4000);
 }
 
 
