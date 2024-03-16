@@ -77,17 +77,18 @@ function popStar(star, message) {
     messageElement.style.left = '50%';
     messageElement.style.top = '50%';
     messageElement.style.transform = 'translate(-50%, -50%)'; // Center the message
-    messageElement.style.color = 'white'; // Choose an appropriate text color
-    messageElement.style.fontSize = '24px'; // Larger text size
+    messageElement.style.color = 'white'; // Text color
+    messageElement.style.fontSize = '24px'; // Text size
     messageElement.style.zIndex = '1000'; // Ensure it's above other elements
-    messageElement.style.textAlign = 'center'; // Center text within the element
+    messageElement.style.textAlign = 'center'; // Center text
+    // Apply the animations
+    messageElement.style.animation = `fall 5s linear, fadeOut 5s ease-out`;
     bubbleArea.appendChild(messageElement);
 
-    star.remove(); // Remove the star immediately
-
+    // Remove the message after the animation ends
     setTimeout(() => {
         messageElement.remove();
-    }, 5000); // Message disappears after 5 seconds for longer visibility
+    }, 5000); // Corresponds to the duration of the animations
 }
 
     const startButton = document.getElementById('start-adventure');
