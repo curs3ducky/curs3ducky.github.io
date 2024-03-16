@@ -103,7 +103,7 @@ function popStar(star, message) {
                 }, 3000);
             }
             const music = document.getElementById('background-music');
-            music.volume = 0.10; // Set the volume to 10%
+            music.volume = 0.01; // Set the volume to 10%
             music.play(); // Start the background music
             startButton.style.display = 'none'; // Optionally hide the start button
         });
