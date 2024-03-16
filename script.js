@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "10/10. Many people <br>believe in you."
     ];
     let starCreationInterval;
-
+}
 function createStar() {
     const starContainer = document.createElement('div');
     starContainer.style.position = 'absolute';
