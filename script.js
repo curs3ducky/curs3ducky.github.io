@@ -19,43 +19,43 @@ function createStar() {
     const star = document.createElement('div');
     star.className = 'star';
     const startPos = Math.random() * (window.innerHeight * 0.5);
-    star.style.left = `${Math.random() * window.innerWidth}px`;
-    star.style.top = `${startPos}px`;
     star.style.position = 'absolute';
     bubbleArea.appendChild(star);
 
     let elapsed = 0; // Track the elapsed time in seconds
     const growthPerSecond = 15; // Max size increases by 15px per second
     const minSize = 5; // Minimum size of the star
-    let maxSize = minSize; // Initial max size of the star
+    let maxSize = minSize; // Adjust max size based on elapsed time
     const colors = ['yellow', 'white', 'lightblue']; // Possible colors
-    let colorIndex = 0; // Initial color index
+    let colorIndex = Math.floor(Math.random() * colors.length); // Start with a random color
 
     const updateStar = () => {
-        elapsed += 0.5; // Update every half second
-        maxSize = minSize + growthPerSecond * elapsed; // Update max size based on elapsed time
+        elapsed += 0.1; // Update every 0.1 seconds
+        maxSize = minSize + growthPerSecond * elapsed; // Calculate current max size based on elapsed time
 
-        const cyclePosition = elapsed % 1; // Cycle position between 0 and 1 over 1 second
+        // Determine the current phase of the cycle (0 to 1, then back to 0) over 0.5 seconds
+        const cyclePosition = (elapsed % 0.5) * 2;
         const widthPercentage = cyclePosition <= 0.5 ? cyclePosition * 2 : (1 - cyclePosition) * 2;
         const heightPercentage = 1 - widthPercentage;
 
         star.style.width = `${minSize + (maxSize - minSize) * widthPercentage}px`;
         star.style.height = `${minSize + (maxSize - minSize) * heightPercentage}px`;
         star.style.backgroundColor = colors[colorIndex];
-        star.style.opacity = Math.random().toString();
+        star.style.opacity = (0.5 + 0.5 * Math.random()).toString(); // Keep it more visible
 
-        // Centering might need adjustment based on new logic
-        star.style.left = `calc(${startPos}px - ${star.style.width} / 2)`;
-        star.style.top = `calc(${startPos}px - ${star.style.height} / 2)`;
-
-        // 50% chance to change color with each update
-        if (Math.random() < 0.5) {
+        // Randomly change color
+        if (Math.random() < 0.1) {
             colorIndex = (colorIndex + 1) % colors.length;
+            star.style.backgroundColor = colors[colorIndex];
         }
+
+        // Adjust the position to keep the star centered as its size changes
+        star.style.left = `${Math.random() * (window.innerWidth - maxSize)}px`;
+        star.style.top = `${startPos - maxSize / 2}px`;
     };
 
-    // Update the star every 0.5 seconds
-    const updateInterval = setInterval(updateStar, 500);
+    // Update the star every 0.1 seconds for smoother transitions
+    const updateInterval = setInterval(updateStar, 100);
 
     // After 3 seconds, stop updating and remove the star
     setTimeout(() => {
