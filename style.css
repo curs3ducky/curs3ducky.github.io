@@ -5,6 +5,14 @@ body {
     background-repeat: no-repeat;
 }
 
+/* Example media query for devices with a max-width of 768px */
+@media (max-width: 768px) {
+    body {
+        background-size: cover;
+        /* Adjustments specific to mobile devices */
+    }
+}
+
 .star {
     position: absolute;
     border-radius: 50%;
