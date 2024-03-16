@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 starCreationInterval = setInterval(createStar, 3000); // Then create stars every 3 seconds
             }
             const music = document.getElementById('background-music');
-            music.volume = 0.12; // Set the volume to 12%
+            music.volume = 0.2; // Set the volume to 20%
             music.play(); // Start playing the background music
             startButton.style.display = 'none'; // Hide the start button after it's clicked
         });
