@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const bubbleArea = document.getElementById('bubble-area');
-    // Define your 10 specific messages here
     const messages = [
         "1/10. Your existance <br>makes people happy.",
         "2/10. You are precious <br>& loved.",
@@ -10,117 +9,96 @@ document.addEventListener('DOMContentLoaded', () => {
         "6/10. You are fun <br>& a good friend.",
         "7/10. You are kind <br>& sweet.",
         "8/10. You are loyal <br>& thoughtful.",
-        "9/10. You are resiliant <br>& try again.",
+        "9/10. You are resilient <br>& try again.",
         "10/10. Many people <br>believe in you."
     ];
     let starCreationInterval;
 
-function createStar() {
-    const starContainer = document.createElement('div');
-    starContainer.style.position = 'absolute';
-    const containerSize = 45;
-    const startPosX = Math.random() * (window.innerWidth - containerSize);
-    const startPosY = Math.random() * (window.innerHeight * 0.5 - containerSize);
-    starContainer.style.left = `${startPosX}px`;
-    starContainer.style.top = `${startPosY}px`;
-    starContainer.style.width = `${containerSize}px`;
-    starContainer.style.height = `${containerSize}px`;
-    starContainer.style.display = 'flex';
-    starContainer.style.alignItems = 'center';
-    starContainer.style.justifyContent = 'center';
-    bubbleArea.appendChild(starContainer);
+    function createStar() {
+        const starContainer = document.createElement('div');
+        starContainer.style.position = 'absolute';
+        const containerSize = 45; // Maximum size of the star for the container
+        const startPosX = Math.random() * (window.innerWidth - containerSize);
+        const startPosY = Math.random() * (window.innerHeight * 0.5 - containerSize);
+        starContainer.style.left = `${startPosX}px`;
+        starContainer.style.top = `${startPosY}px`;
+        starContainer.style.width = `${containerSize}px`;
+        starContainer.style.height = `${containerSize}px`;
+        starContainer.style.display = 'flex';
+        starContainer.style.alignItems = 'center';
+        starContainer.style.justifyContent = 'center';
+        bubbleArea.appendChild(starContainer);
 
-    // Add event listener to the container for popping the star
-starContainer.addEventListener('click', function() {
-    const messageIndex = Math.floor(Math.random() * messages.length);
-    popStar(this, messages[messageIndex]); // Use 'this' to refer to starContainer
-});
-    
-    const star = document.createElement('div');
-    star.className = 'star';
-    starContainer.appendChild(star);
+        const star = document.createElement('div');
+        star.className = 'star';
+        starContainer.appendChild(star);
 
-    let elapsed = 0;
-    const growthPerUpdate = 2;
-    const minSize = 4;
-    const colors = ['yellow'];
-    let colorIndex = 0;
+        let elapsed = 0;
+        const growthPerUpdate = 2;
+        const minSize = 4;
+        const colors = ['yellow'];
+        let colorIndex = 0;
 
-    const updateStar = () => {
-        elapsed += 0.1;
-        let currentSize = minSize + growthPerUpdate * (elapsed * 10);
-        const cyclePosition = (elapsed % 0.5) / 0.5;
-        const dynamicSize = minSize + (currentSize - minSize) * (cyclePosition <= 0.5 ? cyclePosition * 2 : (1 - cyclePosition) * 2);
-        star.style.width = `${dynamicSize * (1 - cyclePosition)}px`;
-        star.style.height = `${dynamicSize * cyclePosition}px`;
-        star.style.backgroundColor = colors[colorIndex];
-
-        if (Math.random() < 0.1) {
-            colorIndex = (colorIndex + 1) % colors.length;
+        const updateStar = () => {
+            elapsed += 0.1;
+            let currentSize = minSize + growthPerUpdate * (elapsed * 10);
+            const cyclePosition = (elapsed % 0.5) / 0.5;
+            const dynamicSize = minSize + (currentSize - minSize) * (cyclePosition <= 0.5 ? cyclePosition * 2 : (1 - cyclePosition) * 2);
+            star.style.width = `${dynamicSize * (1 - cyclePosition)}px`;
+            star.style.height = `${dynamicSize * cyclePosition}px`;
             star.style.backgroundColor = colors[colorIndex];
-        }
-    };
 
-    const updateInterval = setInterval(updateStar, 100);
+            if (Math.random() < 0.1) {
+                colorIndex = (colorIndex + 1) % colors.length;
+                star.style.backgroundColor = colors[colorIndex];
+            }
+        };
 
-    setTimeout(() => {
-        clearInterval(updateInterval);
-        starContainer.remove(); // Ensure the container is removed, not just the star
-    }, 3000);
+        const updateInterval = setInterval(updateStar, 100);
 
-    // Add event listener to the container for popping the star
-    starContainer.addEventListener('click', function() {
-        const messageIndex = Math.floor(Math.random() * messages.length);
-        popStar(starContainer, messages[messageIndex]); // Pass the container to popStar
-    });
-}
+        setTimeout(() => {
+            clearInterval(updateInterval);
+            starContainer.remove(); // Correctly ensures the container is removed, not just the star
+        }, 3000);
 
+        starContainer.addEventListener('click', function() {
+            const messageIndex = Math.floor(Math.random() * messages.length);
+            popStar(this, messages[messageIndex]);
+        });
+    }
 
-function popStar(star, message) {
-    const messageElement = document.createElement('div');
-    messageElement.innerText = message;
-    messageElement.style.position = 'absolute';
-    messageElement.style.left = '35%';
-    messageElement.style.top = '20%';
-    messageElement.style.transform = 'translate(-50%, -50%)'; // Center the message
-    messageElement.style.color = 'white'; // Text color
-    messageElement.style.fontSize = '24px'; // Text size
-    messageElement.style.zIndex = '1000'; // Ensure it's above other elements
-    messageElement.style.textAlign = 'center'; // Center text
-    // Apply the animations
-    messageElement.style.animation = `fall 5s linear, fadeOut 5s ease-out`;
-    bubbleArea.appendChild(messageElement);
-    
-    starContainer.remove(); // Remove the clicked star container immediately
+    function popStar(starContainer, message) {
+        const messageElement = document.createElement('div');
+        messageElement.innerHTML = message; // Use innerHTML to interpret <br> tags
+        messageElement.style.position = 'absolute';
+        messageElement.style.left = '50%';
+        messageElement.style.top = '50%';
+        messageElement.style.transform = 'translate(-50%, -50%)';
+        messageElement.style.color = 'white';
+        messageElement.style.fontSize = '24px';
+        messageElement.style.zIndex = '1000';
+        messageElement.style.textAlign = 'center';
+        messageElement.style.animation = 'fall 5s linear, fadeOut 5s ease-out';
+        bubbleArea.appendChild(messageElement);
 
-    // Remove the message after the animation ends
-    setTimeout(() => {
-        messageElement.remove();
-    }, 5000); // Corresponds to the duration of the animations
-}
+        starContainer.remove(); // Immediately remove the star container upon click
+
+        setTimeout(() => {
+            messageElement.remove();
+        }, 5000); // Remove the message after the animation ends
+    }
 
     const startButton = document.getElementById('start-adventure');
     if (startButton) {
         startButton.addEventListener('click', () => {
-            // Ensure we don't set up multiple intervals if button is clicked more than once
             if (!starCreationInterval) {
-                createStar(); // Create an initial star right away
-                starCreationInterval = setInterval(() => {
-                    createStar(); // Continuously create stars every 3 seconds
-                }, 3000);
+                createStar(); // Create the first star immediately
+                starCreationInterval = setInterval(createStar, 3000); // Then create stars every 3 seconds
             }
             const music = document.getElementById('background-music');
             music.volume = 0.12; // Set the volume to 12%
-            music.play(); // Start the background music
-            startButton.style.display = 'none'; // Optionally hide the start button
+            music.play(); // Start playing the background music
+            startButton.style.display = 'none'; // Hide the start button after it's clicked
         });
     }
-
-    // Delegate click event to bubble-area for handling star pops
-    bubbleArea.addEventListener('click', function(event) {
-        if (event.target.classList.contains('star')) {
-            const messageIndex = Math.floor(Math.random() * messages.length);
-            popStar(event.target, messages[messageIndex]);
-        }
-    });
 });
