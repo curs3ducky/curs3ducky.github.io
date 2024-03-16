@@ -57,12 +57,12 @@ function createStar() {
     // Update the star every 0.5 seconds
     const updateInterval = setInterval(updateStar, 500);
 
-    // After 4 seconds, stop updating and remove the star
+    // After 3 seconds, stop updating and remove the star
     setTimeout(() => {
         clearInterval(updateInterval);
         star.remove();
         createStar(); // Create a new star
-    }, 4000);
+    }, 3000);
 }
 
 
