@@ -30,6 +30,12 @@ function createStar() {
     starContainer.style.justifyContent = 'center';
     bubbleArea.appendChild(starContainer);
 
+    // This is the event listener for popping the star, kept only once
+    starContainer.addEventListener('click', function() {
+        const messageIndex = Math.floor(Math.random() * messages.length);
+        popStar(this, messages[messageIndex]); // Use 'this' to refer to starContainer
+    });
+
     const star = document.createElement('div');
     star.className = 'star';
     starContainer.appendChild(star);
@@ -59,14 +65,8 @@ function createStar() {
 
     setTimeout(() => {
         clearInterval(updateInterval);
-        starContainer.remove(); // Ensure the container is removed, not just the star
+        starContainer.remove(); // Correctly ensures the container is removed, not just the star
     }, 3000);
-
-    // Add event listener to the container for popping the star
-    starContainer.addEventListener('click', function() {
-        const messageIndex = Math.floor(Math.random() * messages.length);
-        popStar(starContainer, messages[messageIndex]); // Pass the container to popStar
-    });
 }
 
 
@@ -74,7 +74,7 @@ function popStar(star, message) {
     const messageElement = document.createElement('div');
     messageElement.innerText = message;
     messageElement.style.position = 'absolute';
-    messageElement.style.left = '50%';
+    messageElement.style.left = '35%';
     messageElement.style.top = '20%';
     messageElement.style.transform = 'translate(-50%, -50%)'; // Center the message
     messageElement.style.color = 'white'; // Text color
@@ -84,6 +84,8 @@ function popStar(star, message) {
     // Apply the animations
     messageElement.style.animation = `fall 5s linear, fadeOut 5s ease-out`;
     bubbleArea.appendChild(messageElement);
+    
+    starContainer.remove(); // Remove the clicked star container immediately
 
     // Remove the message after the animation ends
     setTimeout(() => {
