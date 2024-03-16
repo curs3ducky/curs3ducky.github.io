@@ -15,3 +15,22 @@ body {
     background-color: #add8e6;
     overflow: hidden;
 }
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background-color: yellow;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transition: opacity 1s, transform 1s; /* Transition for the pop effect */
+    animation: shine 2s forwards; /* Animation to grow and shine */
+}
+
+@keyframes shine {
+    to {
+        width: 75px; /* 2cm approximately */
+        height: 75px;
+        opacity: 1;
+    }
+}
