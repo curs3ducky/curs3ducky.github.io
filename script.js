@@ -11,7 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         star.style.top = `${startPos}px`;
 
         bubbleArea.appendChild(star);
+
+        // Remove the star after 3 seconds
+        setTimeout(() => {
+            star.remove();
+        }, 3000); // This ensures the star goes away on its own
     }
+
 
     function popStar(star, message) {
         star.innerText = message;
