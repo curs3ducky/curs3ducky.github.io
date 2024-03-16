@@ -10,9 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
         star.style.top = `${startPos}px`;
 
         bubbleArea.appendChild(star);
-        setTimeout(() => {
-            star.remove();
-        }, 2000); // Shine for 2 seconds before disappearing
+        // Remove the auto-removal of stars after 2 seconds if you want them to stay until clicked
+        // setTimeout(() => {
+        //     star.remove();
+        // }, 2000); // Shine for 2 seconds before disappearing
     }
 
     function popStar(star, message) {
@@ -21,13 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
         star.style.transform = 'scale(0)'; // Shrink down the star
         setTimeout(() => {
             star.remove();
+            createStar(); // Create a new star after one is popped
         }, 1000); // Remove star after 1 second to allow for fade out animation
     }
 
-    // Create a star every 2 seconds
-    setInterval(() => {
-        createStar();
-    }, 2000);
+    // Commented out the interval that creates stars every 2 seconds
+    // setInterval(() => {
+    //     createStar();
+    // }, 2000);
+
+    const startButton = document.getElementById('start-adventure');
+    if (startButton) {
+        startButton.addEventListener('click', () => {
+            createStar(); // Create the initial star
+            const music = document.getElementById('background-music');
+            music.volume = 0.2; // Set the volume to 20%
+            music.play(); // Start the background music
+        });
+    }
 
     // Add click event to bubble-area for delegation
     bubbleArea.addEventListener('click', function(event) {
