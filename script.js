@@ -21,30 +21,48 @@ function createStar() {
     const startPos = Math.random() * (window.innerHeight * 0.5);
     star.style.left = `${Math.random() * window.innerWidth}px`;
     star.style.top = `${startPos}px`;
+    star.style.opacity = '1'; // Ensure visibility for testing
     bubbleArea.appendChild(star);
 
-    star.style.width = '20px';  // Example width
-    star.style.height = '20px'; // Example height
+    // Initialize star dimensions
+    star.style.width = '0px';
+    star.style.height = '0px';
 
-    // Possible colors for the star
-    const colors = ['yellow', 'white', 'lightblue']; // Example colors
-    let currentColorIndex = 0; // Start with the first color
+    let growing = true; // Flag to track growth/shrink
 
-    // Change opacity and possibly color every 0.2 seconds
-    const opacityInterval = setInterval(() => {
-        const newOpacity = Math.random(); // Random opacity between 0.0 and 1.0
-        star.style.opacity = newOpacity;
+    // Function to update star dimensions
+    function updateStarSize() {
+        const maxSize = 45; // Maximum size of width/height
+        let size = parseInt(star.style.width, 10); // Current size
 
-        // 50% chance to change color
-        if (Math.random() < 0.5) {
-            currentColorIndex = (currentColorIndex + 1) % colors.length; // Cycle through the colors
-            star.style.backgroundColor = colors[currentColorIndex];
+        if (growing) {
+            size += 5; // Increment size
+            if (size >= maxSize) {
+                growing = false; // Start shrinking once max size is reached
+            }
+        } else {
+            size -= 5; // Decrement size
+            if (size <= 0) {
+                growing = true; // Start growing once min size is reached
+            }
         }
-    }, 200);
+
+        // Update dimensions to stretch in alternate directions
+        if (growing) {
+            star.style.width = `${size}px`;
+            star.style.height = `${maxSize - size}px`;
+        } else {
+            star.style.width = `${maxSize - size}px`;
+            star.style.height = `${size}px`;
+        }
+    }
+
+    // Update star size twice a second
+    const sizeInterval = setInterval(updateStarSize, 500);
 
     // Remove the star and clear the interval after 3 seconds
     setTimeout(() => {
-        clearInterval(opacityInterval);
+        clearInterval(sizeInterval);
         star.remove();
     }, 3000);
 }
