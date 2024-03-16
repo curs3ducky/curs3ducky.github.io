@@ -44,13 +44,17 @@ function createStar() {
                      currentSize - (currentSize - minSize) * ((cyclePosition - 0.5) * 2);
         
         star.style.width = `${size*cyclePosition}px`;
-        star.style.height = `${size*(1-cyclePosition)}px`; // Keep the star's aspect ratio 1:1 for simplicity
+        star.style.height = `${size*(1-cyclePosition)}px`; // Inverse
         star.style.backgroundColor = colors[colorIndex];
         star.style.opacity = (0.5 + Math.random() * 0.5).toString(); // Random opacity between 0.5 and 1.0
 
-        // Recalculate the position to ensure the star remains centered
-        star.style.left = `${startPosX - size / 2}px`;
-        star.style.top = `${startPosY - size / 2}px`;
+// Calculate the new position to keep the star centered
+const newPositionX = startPosX - (size * cyclePosition) / 2;
+const newPositionY = startPosY - (size * (1 - cyclePosition)) / 2;
+
+// Set the new position
+star.style.left = `${newPositionX}px`;
+star.style.top = `${newPositionY}px`;
 
         // Randomly change color
         if (Math.random() < 0.1) {
