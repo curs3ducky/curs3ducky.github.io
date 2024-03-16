@@ -12,10 +12,3 @@ body {
     opacity: 0; /* Initial opacity, will be controlled by JS */
     animation: blinkWidth 3s infinite alternate, blinkHeight 3s infinite alternate;
 }
-
-#bubble-area {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Or any specific height */
-    overflow: hidden;
-}
