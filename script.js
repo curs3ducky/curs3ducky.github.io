@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "10/10. Many people <br>believe in you."
     ];
     let starCreationInterval;
-}
+
 function createStar() {
     const starContainer = document.createElement('div');
     starContainer.style.position = 'absolute';
@@ -30,12 +30,12 @@ function createStar() {
     starContainer.style.justifyContent = 'center';
     bubbleArea.appendChild(starContainer);
 
-    // This is the event listener for popping the star, kept only once
-    starContainer.addEventListener('click', function() {
-        const messageIndex = Math.floor(Math.random() * messages.length);
-        popStar(this, messages[messageIndex]); // Use 'this' to refer to starContainer
-    });
-
+    // Add event listener to the container for popping the star
+starContainer.addEventListener('click', function() {
+    const messageIndex = Math.floor(Math.random() * messages.length);
+    popStar(this, messages[messageIndex]); // Use 'this' to refer to starContainer
+});
+    
     const star = document.createElement('div');
     star.className = 'star';
     starContainer.appendChild(star);
@@ -65,8 +65,14 @@ function createStar() {
 
     setTimeout(() => {
         clearInterval(updateInterval);
-        starContainer.remove(); // Correctly ensures the container is removed, not just the star
+        starContainer.remove(); // Ensure the container is removed, not just the star
     }, 3000);
+
+    // Add event listener to the container for popping the star
+    starContainer.addEventListener('click', function() {
+        const messageIndex = Math.floor(Math.random() * messages.length);
+        popStar(starContainer, messages[messageIndex]); // Pass the container to popStar
+    });
 }
 
 
