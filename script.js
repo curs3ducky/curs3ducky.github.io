@@ -46,8 +46,8 @@ star.style.width = `${dynamicSize * (1 - cyclePosition)}px`; // Decrease width a
 star.style.height = `${dynamicSize * cyclePosition}px`; // Increase height as cyclePosition increases
 
 // Calculate the new position to keep the star centered
-const newPositionX = startPosX - (size * cyclePosition) / 2;
-const newPositionY = startPosY - (size * (1 - cyclePosition)) / 2;
+const newPositionX = startPosX - (dynamicSize * (1 - cyclePosition)) / 2; // Adjust for dynamicSize
+const newPositionY = startPosY - (dynamicSize * cyclePosition) / 2; // Adjust for dynamicSize
 
 // Set the new position
 star.style.left = `${newPositionX}px`;
