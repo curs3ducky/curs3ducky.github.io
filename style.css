@@ -10,7 +10,7 @@ body {
 /* Styles for mobile devices */
 @media (max-width: 768px) {
     body {
-        background-position: top center; /* Shifts the background image down */
+        background-position: top center 20%; /* Shifts the background image down */
         padding-top: 20vh; /* Adds padding to the top, pushing all content down */
     }
 }
