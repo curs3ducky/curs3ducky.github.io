@@ -8,31 +8,7 @@ body {
 .star {
     position: absolute;
     border-radius: 50%;
-    background-color: yellow;
-    width: 0;
-    height: 0;
-    opacity: 0;
-    transition: opacity 1s, transform 1s; /* Transition for the pop effect */
-    animation: shine 3s forwards; /* Animation to grow and shine */
-}
-
-@keyframes shine {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 0.5; /* Starting with a bit of visibility */
-        background-color: yellow;
-    }
-    50% {
-        width: 50px; /* Making it a bit smaller than before */
-        height: 50px;
-        opacity: 1; /* Fully visible at the halfway point */
-        background-color: white; /* Change to white at the halfway point */
-    }
-    100% {
-        width: 50px;
-        height: 50px;
-        opacity: 0.5; /* Ending with a bit of visibility */
-        background-color: yellow; /* Back to yellow */
-    }
+    background-color: yellow; /* Default color, will be changed by JS */
+    opacity: 0; /* Initial opacity, will be controlled by JS */
+    animation: blinkWidth 3s infinite alternate, blinkHeight 3s infinite alternate;
 }
