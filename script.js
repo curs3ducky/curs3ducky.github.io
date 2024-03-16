@@ -42,12 +42,9 @@ function createStar() {
         const size = cyclePosition < 0.5 ? 
                      minSize + (currentSize - minSize) * (cyclePosition * 2) :
                      currentSize - (currentSize - minSize) * ((cyclePosition - 0.5) * 2);
-        const size2 = cyclePosition > 0.5 ? 
-                     minSize + (currentSize - minSize) * (cyclePosition * 2) :
-                     currentSize - (currentSize - minSize) * ((cyclePosition - 0.5) * 2);
         
-        star.style.width = `${size}px`;
-        star.style.height = `${size2}px`; // Keep the star's aspect ratio 1:1 for simplicity
+        star.style.width = `${size*cyclePosition}px`;
+        star.style.height = `${size*(1-cyclePosition)}px`; // Keep the star's aspect ratio 1:1 for simplicity
         star.style.backgroundColor = colors[colorIndex];
         star.style.opacity = (0.5 + Math.random() * 0.5).toString(); // Random opacity between 0.5 and 1.0
 
