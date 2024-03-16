@@ -15,20 +15,36 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     let starCreationInterval;
 
-    function createStar() {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const startPos = Math.random() * (window.innerHeight * 0.5);
-        star.style.left = `${Math.random() * window.innerWidth}px`;
-        star.style.top = `${startPos}px`;
+function createStar() {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const startPos = Math.random() * (window.innerHeight * 0.5);
+    star.style.left = `${Math.random() * window.innerWidth}px`;
+    star.style.top = `${startPos}px`;
+    bubbleArea.appendChild(star);
 
-        bubbleArea.appendChild(star);
+    // Possible colors for the star
+    const colors = ['yellow', 'white', 'lightblue']; // Example colors
+    let currentColorIndex = 0; // Start with the first color
 
-        // Remove the star after 3 seconds
-        setTimeout(() => {
-            star.remove();
-        }, 3000); // This ensures the star goes away on its own
-    }
+    // Change opacity and possibly color every 0.2 seconds
+    const opacityInterval = setInterval(() => {
+        const newOpacity = Math.random(); // Random opacity between 0.0 and 1.0
+        star.style.opacity = newOpacity;
+
+        // 50% chance to change color
+        if (Math.random() < 0.5) {
+            currentColorIndex = (currentColorIndex + 1) % colors.length; // Cycle through the colors
+            star.style.backgroundColor = colors[currentColorIndex];
+        }
+    }, 200);
+
+    // Remove the star and clear the interval after 3 seconds
+    setTimeout(() => {
+        clearInterval(opacityInterval);
+        star.remove();
+    }, 3000);
+}
 
 
     function popStar(star, message) {
