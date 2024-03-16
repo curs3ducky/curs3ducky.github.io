@@ -7,18 +7,18 @@ body {
     transition: background-position 0.5s ease; /* Smooth transition for background-position */
 }
 
-/* Styles for mobile devices */
-@media (max-width: 768px) {
-    body {
-        background-position: top center; /* Shifts the background image down */
-        padding-top: 20vh; /* Adds padding to the top, pushing all content down */
-    }
-}
-
 .star {
     position: absolute;
     border-radius: 50%;
     background-color: yellow; /* Default color, will be changed by JS */
     opacity: 1; /* Initial opacity, will be controlled by JS */
     animation: blinkWidth 3s infinite alternate, blinkHeight 3s infinite alternate;
+}
+
+/* Styles for mobile devices */
+@media (max-width: 768px) {
+    body {
+        background-position: top center; /* Shifts the background image down */
+        padding-top: 30vh; /* Adds padding to the top, pushing all content down */
+    }
 }
