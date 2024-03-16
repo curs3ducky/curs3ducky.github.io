@@ -15,6 +15,24 @@ body {
     animation: blinkWidth 3s infinite alternate, blinkHeight 3s infinite alternate;
 }
 
+@keyframes fall {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100px); /* Adjust this value based on the desired falling distance */
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 /* Styles for mobile devices */
 @media (max-width: 768px) {
     body {
